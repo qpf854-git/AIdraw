@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QMind · AI 智能绘图</title>
+  <link rel="preconnect" href="https://embed.diagrams.net" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#5eead4"/>
+                <stop offset="0.5" stop-color="#38bdf8"/>
+                <stop offset="1" stop-color="#818cf8"/>
+              </linearGradient>
+            </defs>
+            <path d="M16 2 L29 9 V23 L16 30 L3 23 V9 Z" fill="none" stroke="url(#g)" stroke-width="2"/>
+            <circle cx="16" cy="16" r="4" fill="url(#g)"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-name">QMind</div>
+          <div class="brand-sub">AI 智能绘图 · draw.io powered</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="model-tag" id="modelTag">DeepSeek</div>
+        <div class="status" id="status">
+          <span class="dot" id="statusDot"></span>
+          <span id="statusText">初始化中</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="agent-panel">
+        <div class="panel-header">
+          <span class="panel-title"><span class="ai-badge">AI</span> Agent</span>
+          <span class="turn-count" id="turnCount">0 轮</span>
+        </div>
+
+        <div class="messages" id="messages" role="log" aria-live="polite"></div>
+
+        <div class="presets">
+          <button class="preset" data-preset="flowchart">流程图</button>
+          <button class="preset" data-preset="mindmap">思维导图</button>
+          <button class="preset" data-preset="architecture">架构图</button>
+          <button class="preset" data-preset="er">ER 图</button>
+        </div>
+
+        <div class="composer">
+          <textarea id="prompt" placeholder="描述你想画的图…&#10;例：用户登录流程，包含验证码校验与密码重试" rows="3"></textarea>
+          <div class="composer-row">
+            <span class="hint" id="hint">回车发送 · Shift+回车换行</span>
+            <button id="sendBtn" class="primary" disabled>生成</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="canvas-wrap">
+        <div class="canvas-toolbar">
+          <div class="tb-title">画布</div>
+          <div class="tb-actions">
+            <button id="fitBtn" title="适应窗口">适应</button>
+            <button id="zoomInBtn" title="放大">＋</button>
+            <button id="zoomOutBtn" title="缩小">－</button>
+            <button id="exportBtn" title="导出 PNG/SVG">导出</button>
+            <button id="clearBtn" title="清空画布">清空</button>
+          </div>
+        </div>
+        <div class="iframe-shell">
+          <iframe id="drawio" class="drawio-frame" title="draw.io editor"></iframe>
+          <div class="iframe-overlay" id="overlay">
+            <div class="spinner"></div>
+            <div>正在加载 draw.io 编辑器…</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
